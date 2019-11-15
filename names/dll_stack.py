@@ -24,11 +24,11 @@ class Stack:
 
 
 #  follows the LIFO rule of stacks
-stack = Stack()
-stack.push(0)
-stack.push(2)
-stack.push(3)
-stack.push(4)
-stack.push(5)
-stack.pop()
-print(stack.storage.head.value)
+# stack = Stack()
+# stack.push(0)
+# stack.push(2)
+# stack.push(3)
+# stack.push(4)
+# stack.push(5)
+# stack.pop()
+# print(stack.storage.head.value)

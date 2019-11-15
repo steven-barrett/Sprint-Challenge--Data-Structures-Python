@@ -9,9 +9,11 @@ class Binary_Search_Tree:
         self.value = value
         self.left = None
         self.right = None
+        self.count = 1
+        self.duplicates = []
 
     # Insert the given value into the tree
-    def insert(self, value):
+    def insert(self, value):        
         if (value < self.value):
             if (not self.left):
                 self.left = Binary_Search_Tree(value)
@@ -26,10 +28,7 @@ class Binary_Search_Tree:
 
         # Return True if the tree contains the value
         # False if it does not
-    def create(self, seq):                
-        for word in seq:
-            self.insert(word)
-                    
+
     def contains(self, target):
         if (self.value == target):
             return True
@@ -57,9 +56,45 @@ class Binary_Search_Tree:
         cb(self.value)
 
         if self.left:
-            self.left.for_each(cb)
+            self.left.for_each()
         if self.right:
-            self.right.for_each(cb)
+            self.right.for_each()
+    
+    def delete(self, key):
+    # delete the node with the given key and return the root node of the tree
+        if self.value == key:
+        # found the node we need to delete
+            if self.right and self.left:
+                # get the successor node and its parent
+                [psucc, succ] = self.right._findMin(self)
+
+                # splice out the successor
+                # (we need the parent to do this)
+                if psucc.left == succ:
+                    psucc.left = succ.right
+                else:
+                    psucc.right = succ.right
+
+                # reset the left and right children of the successor
+                succ.left = self.left
+                succ.right = self.right
+                return succ
+            else:
+                # "easier" case
+                if self.left:
+                    return self.left    # promote the left subtree
+                else:
+                    return self.right   # promote the right subtree
+        else:
+            if self.value > key:          # key should be in the left subtree
+                if self.left:
+                    self.left = self.left.delete(key)
+            # else the key is not in the tree
+            else:                       # key should be in the right subtree
+                if self.right:
+                    self.right = self.right.delete(key)
+        return self
+
 
     # DAY 2 Project -----------------------
 
@@ -123,18 +158,18 @@ def cb(value):
     print(value)
 
 
-BST = Binary_Search_Tree(20)
-BST.insert(50)
-BST.insert(11)
-BST.insert(42)
-BST.insert(9)
-BST.insert(16)
-BST.insert(10)
-BST.insert(15)
-BST.insert(4)
-BST.insert(3)
-BST.insert(0)
-BST.bft_print(BST)
+# BST = Binary_Search_Tree(20)
+# BST.insert(50)
+# BST.insert(11)
+# BST.insert(42)
+# BST.insert(9)
+# BST.insert(16)
+# BST.insert(10)
+# BST.insert(15)
+# BST.insert(4)
+# BST.insert(3)
+# BST.insert(0)
+# BST.bft_print(BST)
 
 # print(BST.get_max())
 # print(BST.contains(6))

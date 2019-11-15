@@ -88,6 +88,8 @@ While credit will be given for a functional solution, only optimal solutions wil
 
 * Say your code from `names.py` is to run on an embedded computer with very limited RAM. Because of this, memory is extremely constrained and you are only allowed to store names in arrays (i.e. Python lists). How would you go about optimizing the code under these conditions? Try it out and compare your solution to the original runtime. (If this solution is less efficient than your original solution, include both and label the strech solution with a comment)
 
+duplicates = [item for item in names_1 if item in names_2] it runs in 1.2 seconds compared to 7.2 on the original
+
 
 ### Rubric
 | OBJECTIVE | TASK | 1 - DOES NOT MEET Expectations | 2 - MEETS Expectations | 3 - EXCEEDS Expectations | SCORE |
