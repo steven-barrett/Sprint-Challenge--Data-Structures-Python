@@ -1,34 +1,28 @@
 import collections
 
 
-class Ring_Buffer:
+class RingBuffer:
     def __init__(self, capacity):
         self.capacity = capacity
         self.current = 0
-        self.storage = collections.OrderedDict()
+        self.storage = [None]*capacity
 
     def append(self, item):
-        try:
+        self.storage[self.current] = item
+        if self.current == self.capacity-1:
+            self.current = 0
+        else:
             self.current += 1
-            self.storage.pop(item)
-        except KeyError:
-            if len(self.storage) >= self.capacity:
-                self.storage.popitem(last=False)
-                self.current = self.capacity
-        self.storage[item] = item
 
     def get(self):
-        items = []
-        try:
-            for item in self.storage:
-                if not item == None:
-                    items.append(item)
-            return items
-        except KeyError:
-            return None
+        results = []
+        for item in self.storage:
+            if item is not None:
+                results.append(item)
+        return results
 
 
-buffer = Ring_Buffer(4)
+buffer = RingBuffer(4)
 buffer.append(1)
 buffer.append(2)
 buffer.append(3)

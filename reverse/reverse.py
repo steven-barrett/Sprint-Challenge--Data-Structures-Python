@@ -43,23 +43,21 @@ class LinkedList:
         # if we've gotten here, then the target node isn't in our list
         return False
 
-    def reverse_list(self):
-        # starting values
+    def reverse_list(self):        
+        # set pointers. current is head, prev and next should be none
         prev = None
-        current = self.head
-        nex = current.get_next()
+        curr = self.head
+        next = None
 
-        # loop
-        while current:
-            current.set_next(prev)
-
-            # move to next
-            prev = current
-            current = nex
-            if nex:
-                nex = nex.get_next()
-
-        # set head
+        while curr is not None:
+            # store the next value
+            next = curr.next_node
+            # store prev vlaue
+            curr.next_node = prev
+            # swap em
+            prev = curr
+            curr = next
+        # once loop is done, set the head to prev, since that was the back
         self.head = prev
 
     def contents(self):
@@ -76,3 +74,4 @@ list1.reverse_list()
 
 print(list1.head.get_value())
 print(list1.head.get_next().get_value())
+print(list1.head.get_next().get_next().get_value())
